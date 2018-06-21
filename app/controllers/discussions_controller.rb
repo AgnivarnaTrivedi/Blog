@@ -1,5 +1,5 @@
 class DiscussionsController < ApplicationController
-  before_action :set_discussion, only: [:show, :edit, :update, :destroy]
+  before_action :set_owned_discussion, only: [ :edit, :update, :destroy]
 
   # GET /discussions
   # GET /discussions.json
@@ -10,6 +10,7 @@ class DiscussionsController < ApplicationController
   # GET /discussions/1
   # GET /discussions/1.json
   def show
+    @discussion =Discussion.find(params[:id])
   end
 
   # GET /discussions/new
@@ -63,8 +64,8 @@ class DiscussionsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_discussion
-      @discussion = Discussion.find(params[:id])
+    def set_owned_discussion
+      @discussion = current_user.discussions.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

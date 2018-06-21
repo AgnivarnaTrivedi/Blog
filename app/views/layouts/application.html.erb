@@ -17,8 +17,8 @@
                 <%= link_to "Blog", root_path, class:"brand-logo" %>
                 <ul class="right hide-on-med-and-down">
                   <% if user_logged_in? %>
-                   <% image_tag(current_user.image_url,width: 50,height: 50) %>
-                   <li><% link_to "Sign out",sign_out_path %></li>
+                   <%=image_tag(current_user.image_url,width: 40,height: 40) %>
+                   <li><%=link_to "Sign out",sign_out_path %></li>
                   <% else %>
                    <li><a href="/auth/twitter">Sign in with twitter</a></li>
                   <% end %>
