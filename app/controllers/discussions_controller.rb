@@ -65,7 +65,17 @@ class DiscussionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_owned_discussion
+      begin
       @discussion = current_user.discussions.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      logger.info " * * * * * *"
+      if user_logged_in?
+        logger.info"#{current_user.name} is trying to edit discussion #{ params[:id]},but they don't own it.
+      logger.info e
+      logger.info " * * * * * *"
+      flash[:notice] = "You don't have access to that :("
+      redirect_to root_path
+    end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
