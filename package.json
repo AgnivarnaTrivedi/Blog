@@ -1,0 +1,5 @@
+{
+  "name": "BLOG--database=postgresql",
+  "private": true,
+  "dependencies": {}
+}
